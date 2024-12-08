@@ -83,20 +83,22 @@ impl NewAccount {
                     if !crate::common::ask_if_different_account_id_wanted()? {
                         return Ok(Some(account_id));
                     };
-                } else if account_id.0.as_str().chars().count()
-                    < MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH
-                    && account_id.0.is_top_level()
-                {
-                    eprintln!(
-                        "\nAccount <{}> has <{}> character count. Only the registrar account can create new top level accounts that are shorter than {} characters. Read more about it in nomicon: https://nomicon.io/DataStructures/Account#top-level-accounts",
-                        &account_id,
-                        &account_id.0.as_str().chars().count(),
-                        MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH,
-                    );
-                    if !crate::common::ask_if_different_account_id_wanted()? {
-                        return Ok(Some(account_id));
-                    };
-                } else {
+                } 
+                // else if account_id.0.as_str().chars().count()
+                //     < MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH
+                //     && account_id.0.is_top_level()
+                // {
+                //     eprintln!(
+                //         "\nAccount <{}> has <{}> character count. Only the registrar account can create new top level accounts that are shorter than {} characters. Read more about it in nomicon: https://nomicon.io/DataStructures/Account#top-level-accounts",
+                //         &account_id,
+                //         &account_id.0.as_str().chars().count(),
+                //         MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH,
+                //     );
+                //     if !crate::common::ask_if_different_account_id_wanted()? {
+                //         return Ok(Some(account_id));
+                //     };
+                // } 
+                else {
                     let parent_account_id =
                         account_id.clone().get_parent_account_id_from_sub_account();
                     if !near_primitives::types::AccountId::from(parent_account_id.clone())

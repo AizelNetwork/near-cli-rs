@@ -46,15 +46,15 @@ impl From<SignerAccountIdContext> for crate::commands::ActionContext {
                 let signer_id = item.signer_account_id.clone();
 
                 move |network_config| {
-                    if new_account_id.as_str().chars().count()
-                        < super::MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH
-                        && new_account_id.is_top_level()
-                    {
-                        return color_eyre::eyre::Result::Err(color_eyre::eyre::eyre!(
-                            "\nAccount <{}> has <{}> character count. Only REGISTRAR_ACCOUNT_ID account can create new top level accounts that are shorter than MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH (32) characters.",
-                            new_account_id, new_account_id.as_str().chars().count()
-                        ));
-                    }
+                    // if new_account_id.as_str().chars().count()
+                    //     < super::MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH
+                    //     && new_account_id.is_top_level()
+                    // {
+                    //     return color_eyre::eyre::Result::Err(color_eyre::eyre::eyre!(
+                    //         "\nAccount <{}> has <{}> character count. Only REGISTRAR_ACCOUNT_ID account can create new top level accounts that are shorter than MIN_ALLOWED_TOP_LEVEL_ACCOUNT_LENGTH (32) characters.",
+                    //         new_account_id, new_account_id.as_str().chars().count()
+                    //     ));
+                    // }
                     if !item.global_context.offline {
                         validate_new_account_id(network_config, &new_account_id)?;
                     }
